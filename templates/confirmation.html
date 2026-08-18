@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation - Hotel Last Resort</title>
+    <style>
+        body {
+            font-family: Tahoma, Tahoma;
+            margin: 20px;
+            text-align: center;
+            background-image: url('{{ url_for("static", filename="image/hotelBg.png") }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: white;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.5);
+            
+        }
+        h1 {
+            color: white;
+            margin-bottom: 5px;
+        }
+        h2 {
+            color: white; 
+            margin-top: 30px;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #fff;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hotel Last Resort</h1>
+        <hr>
+        <h2>Thank you for booking! You will receive an email.</h2>
+    </div>
+
+</body>
+</html>

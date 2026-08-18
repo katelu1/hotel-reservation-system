@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Last Resort - Reservation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        body {
+            background-image: url('{{ url_for("static", filename="image/hotelBg.png") }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+          color: white;
+        }
+
+        header {
+           background-color: rgba(250, 235, 215, 0.9);
+           color: #000;
+        }
+
+        label {
+          color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class = "container">
+      <header>
+        <h1>Hotel Last Resort</h1>
+        <a href="{{ url_for('home') }}" class="home-url">Home</a>
+      </header>
+        <form action="/submit-booking" method="GET">
+          <label for="checkin">Check-in Date:</label>
+          <input type="date" id="checkin" name="checkin" required>
+          <label for="checkout">Check-out Date:</label>
+          <input type="date" id="checkout" name="checkout" required>
+          <label for="numGuests">Number of Guests:</label>
+          <input type="number" id="numGuests" name="numGuests" min="1" required>
+          <label for="maxPrice">Maximum Price per Night: $<span id="priceValue">500</span></label>
+          <input type="range" id="maxPrice" name="maxPrice" min="0" max="1000" value="500" step="10">
+          
+          <br><br>
+
+          <div class = "filters">
+              <div class="filters-column">
+                  <strong>Preferences:</strong><br><br>
+                  <input type="checkbox" id="handicap" name="handicap" value="1">
+                  <label for="handicap">Handicapped Accessibility</label><br>
+                  
+                  <input type="checkbox" id="smoking" name="smoking" value="1">
+                  <label for="smoking">Smoking</label><br>
+                  
+                  <br>
+                  <label for="maxProxPool">Maximum Proximity to Pool:</label>
+                  <input type="number" id="maxProxPool" name="maxProxPool" step="0.1" min="0" max="1.0" placeholder="e.g., 0.5">
+                  
+                  <br><br>
+                  <label for="maxProxGarage">Maximum Proximity to Garage:</label>
+                  <input type="number" id="maxProxGarage" name="maxProxGarage" step="0.1" min="0" max="1.0" placeholder="e.g., 0.5">
+              </div>
+
+              <div class="filters-column">
+                  <strong>Select Bed Type(s):</strong><br>
+                  <em>(Leave blank for any bed type)</em><br><br>
+                  {% if bedTypes %}
+                    {% for bedType in bedTypes %}
+                    <input type="checkbox" id="bed_{{ bedType['bedTypeId'] }}" 
+                           name="bedTypes" value="{{ bedType['bedTypeId'] }}">
+                    <label for="bed_{{ bedType['bedTypeId'] }}">{{ bedType['bedTypeName'] }}</label><br>
+                    {% endfor %}
+                  {% else %}
+                    <input type="checkbox" id="bed_twin" name="bedTypes" value="1">
+                    <label for="bed_twin">Twin</label><br>
+                    <input type="checkbox" id="bed_full" name="bedTypes" value="2">
+                    <label for="bed_full">Full</label><br>
+                    <input type="checkbox" id="bed_queen" name="bedTypes" value="3">
+                    <label for="bed_queen">Queen</label><br>
+                    <input type="checkbox" id="bed_king" name="bedTypes" value="4">
+                    <label for="bed_king">King</label><br>
+                  {% endif %}
+              </div>
+            </div>
+
+            <br>
+            <button type="submit">Book Now</button>
+          </form>
+        </div>
+        
+    <script>
+      const priceSlider = document.getElementById('maxPrice');
+      const priceValue = document.getElementById('priceValue');
+
+      priceSlider.addEventListener('input', function() {
+        priceValue.textContent = this.value;
+      });
+    </script>
+</body>
+</html>

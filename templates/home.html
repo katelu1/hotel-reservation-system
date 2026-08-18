@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Last Resort</title>
+    <link rel="stylesheet" href="static/css/main.css">
+    <style>
+        body {
+            background-image: url('static/image/hotelBuilding.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .main-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+        }
+        
+        .reserve-btn {
+            background: linear-gradient(135deg, #FAEBD7 0%, #d89d98 100%);
+            color: #000;
+            padding: 20px 50px;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            margin-bottom: 50px;
+            border: 3px solid #000;
+        }
+        
+        .reserve-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, #d89d98 0%, #FAEBD7 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="main-screen">
+            <a href="{{ url_for('get_available_rooms') }}" class="reserve-btn">Reserve a Room</a>
+            <a href="{{ url_for('queries') }}" class="reserve-btn">View Analytics Dashboard</a>
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="static/image/main1.jpg" alt="Meeting Room">
+                </div>
+                <div class="gallery-item">
+                    <img src="static/image/main2.jpg" alt="Hotel Room">
+                </div>
+                <div class="gallery-item">
+                    <img src="static/image/main3.jpeg" alt="Dining Room">
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

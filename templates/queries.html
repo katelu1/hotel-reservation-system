@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Analytics Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body style="padding: 20px; background: #fafafa;">
+
+<h1>Hotel Analytics Dashboard</h1>
+
+<h2>Average Sleeping Room Rate by Wing</h2>
+<canvas id="rateChart"></canvas>
+
+<h2>Occupied Rooms by Floor</h2>
+<canvas id="occupancyChart"></canvas>
+
+<h2>Check-In Distribution by Hour</h2>
+<canvas id="checkinChart"></canvas>
+
+<h2>Total Revenue By Room</h2>
+<canvas id="revenueChart"></canvas>
+
+<h2>Customer Type Breakdown</h2>
+<canvas id="customerChart"></canvas>
+
+<script>
+    const avgRate = {{ results.avg_rate_by_wing | tojson }};
+    const occupancy = {{ results.occupied_by_floor | tojson }};
+    const checkins = {{ results.checkin_hours | tojson }};
+    const revenue = {{ results.revenue_by_room | tojson }};
+    const custTypes = {{ results.customer_type_dist | tojson }};
+
+    new Chart(document.getElementById('rateChart'), {
+        type: 'bar',
+        data: {
+            labels: avgRate.map(r => "Wing " + r.wingId),
+            datasets: [{ label: "Average Rate", data: avgRate.map(r => r.avgRate) }]
+        }
+    });
+
+    new Chart(document.getElementById('occupancyChart'), {
+        type: 'bar',
+        data: {
+            labels: occupancy.map(o => `Wing ${o.wingId} / Floor ${o.floorNum}`),
+            datasets: [{ label: "Occupied Rooms", data: occupancy.map(o => o.occupiedRooms) }]
+        }
+    });
+
+    new Chart(document.getElementById('checkinChart'), {
+        type: 'line',
+        data: {
+            labels: checkins.map(c => c.hour),
+            datasets: [{ label: "Check-ins", data: checkins.map(c => c.numCheckins) }]
+        }
+    });
+
+    new Chart(document.getElementById('revenueChart'), {
+        type: 'bar',
+        data: {
+            labels: revenue.map(r => r.roomNum),
+            datasets: [{ label: "Revenue", data: revenue.map(r => r.totalRevenue) }]
+        }
+    });
+
+    new Chart(document.getElementById('customerChart'), {
+        type: 'pie',
+        data: {
+            labels: custTypes.map(c => c.customerType),
+            datasets: [{ data: custTypes.map(c => c.numCustomers) }]
+        }
+    });
+</script>
+
+</body>
+</html>

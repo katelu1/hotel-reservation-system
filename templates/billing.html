@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout and Billing </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        body {
+            background-image: url('{{ url_for("static", filename="image/hotelBg.png") }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            color: white;
+        }
+        
+        header {
+            background-color: rgba(250, 235, 215, 0.9);
+            color: #000;
+        }
+        
+        h2, h3 {
+            color: white;
+        }
+        
+        label {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Hotel Last Resort</h1>
+            <a href="{{ url_for('home') }}" class="home-url">Home</a>
+        </header>
+
+    <main>
+        <h2>Secure Checkout</h2>
+
+        <form id="billing-and-guest-form" action="{{ url_for('confirmation') }}" method="POST">
+
+    <h2>Payment Information</h2>
+
+    <label for="card-name">Name on Card</label>
+    <input type="text" id="card-name" name="card_name" placeholder="Full Name">
+
+    <label for="card-number">Credit Card Number</label>
+    <input type="text" id="card-number" name="card_number" placeholder="xxxx xxxx xxxx xxxx" maxlength="19">
+
+    <label for="cvv">CVV / Security Code</label>
+    <input type="text" id="cvv" name="cvv" maxlength="4" placeholder="1234">
+        
+    <label for="expiry-date">Expiration Date</label>
+    <input type="text" id="expiry-date" name="expiry_date" placeholder="MM/YY">
+
+    <hr>
+
+    <h3>Billing Address</h3>
+    <label for="address-line1">Address Line 1</label>
+    <input type="text" id="address-line1" name="address_line1">
+        
+    <label for="city">City</label>
+    <input type="text" id="city" name="city">
+
+    <label for="zip-code">Zip/Postal Code</label>
+    <input type="text" id="zip-code" name="zip_code">
+
+    <hr>
+
+    <h2> Guest and Contact Details</h2>
+
+    <label for="guest-name">Guest Name (on Booking)</label>
+    <input type="text" id="guest-name" name="guest_name" placeholder="John Doe">
+
+    <label for="customer-id">Customer ID (Optional)</label>
+    <input type="text" id="customer-id" name="customer_id" placeholder="CUST-12345">
+
+    <div>
+        <input type="checkbox" id="assign-id" name="assign_id">
+        <label for="assign-id">Assign Customer ID after booking.</label>
+    </div>
+        
+    <hr>
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" placeholder="example@email.com">
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890">
+
+    <br><br>
+    <button type="submit">Complete Booking</button>
+
+</form>
+    </main>
+</div>
+</body>
+</html>
